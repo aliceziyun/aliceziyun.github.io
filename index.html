@@ -111,8 +111,8 @@
 </ul>
 <h4 id="Part2-All-or-nothing"><a href="#Part2-All-or-nothing" class="headerlink" title="Part2 All-or-nothing"></a>Part2 All-or-nothing</h4><p>字面意思（），在上一阶段实现的系统上加入事务操作。以begin为起点，commit为终点。如果只有begin没有commit这些操作不执行。</p>
 <p>这个part比较简单，只需在chfs_client.cc中加入begin和commit，再修改一下redo的逻辑即可。</p>
-<p>比较搞的是在做完这个part后，我的part1不能满分了。最后发现是因为我把两个模块$F_1$和$F_2$改成了$F_1$-&gt;$G$-&gt;$F_1$和$F_2$-&gt;$G$-&gt;$F_2$的形式，而我在$G$上面也添加了事务逻辑。这样虽然能减少代码冗余，但也一定程度上破坏了模块的独立性。</p>
-<p>我的失误在于最后还是回到了冗余代码的形式，如果希望$G$和$F$在同一个事务中的话，不给$G$添加事务逻辑就可以了。但是如果要实现像Spring事务那样自定义的功能，底层需要更复杂的实现。</p>
+<p>比较搞的是在做完这个part后，我的part1不能满分了。最后发现是因为我把两个模块F1和F2改成了F1-&gt;G-&gt;F1和F2-&gt;G-&gt;F2的形式，而我在G上面也添加了事务逻辑。这样虽然能减少代码冗余，但也一定程度上破坏了模块的独立性。</p>
+<p>我的失误在于最后还是回到了冗余代码的形式，如果希望G和F在同一个事务中的话，不给G添加事务逻辑就可以了。但是如果要实现像Spring事务那样自定义的功能，底层需要更复杂的实现。</p>
 <h4 id="Part3-CheckPoint"><a href="#Part3-CheckPoint" class="headerlink" title="Part3 CheckPoint"></a>Part3 CheckPoint</h4><p>考虑到log会无限增长，加入checkpoint机制。给出了两种实现方式：</p>
 <ol>
 <li>对log文件的内容进行压缩</li>
@@ -143,7 +143,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://aliceziyun.github.io/2022/10/29/CSE-Lab2A/" data-id="cl9u6i0ac0000pkuv8lpb62x6" data-title="CSE Lab2A" class="article-share-link">Share</a>
+      <a data-url="https://aliceziyun.github.io/2022/10/29/CSE-Lab2A/" data-id="cl9u6kxg400009wuv9o2n8x1q" data-title="CSE Lab2A" class="article-share-link">Share</a>
       
       
       
@@ -184,7 +184,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://aliceziyun.github.io/2022/10/29/My-New-Post/" data-id="cl9u6i0an0001pkuvdbj733oz" data-title="My New Post" class="article-share-link">Share</a>
+      <a data-url="https://aliceziyun.github.io/2022/10/29/My-New-Post/" data-id="cl9u6kxgb00019wuv3hggdtbr" data-title="My New Post" class="article-share-link">Share</a>
       
       
       
@@ -247,7 +247,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://aliceziyun.github.io/2022/10/29/%E5%88%9B%E5%BB%BAGitPage/" data-id="cl9u6i0av0003pkuvdm6c9lct" data-title="创建GitPage" class="article-share-link">Share</a>
+      <a data-url="https://aliceziyun.github.io/2022/10/29/%E5%88%9B%E5%BB%BAGitPage/" data-id="cl9u6kxgg00039wuv268ygwiu" data-title="创建GitPage" class="article-share-link">Share</a>
       
       
       
