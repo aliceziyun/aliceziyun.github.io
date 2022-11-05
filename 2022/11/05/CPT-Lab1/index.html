@@ -4,14 +4,20 @@
   <meta charset="utf-8">
   
   
-  <title>Tag: cse-lab | Sissi&#39;s blog</title>
+  <title>CPT-Lab1 | Sissi&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Sissi&#39;s blog">
-<meta property="og:url" content="https://aliceziyun.github.io/tags/cse-lab/index.html">
+  <meta name="description" content="lab2  Lexical 使用flex C++做词法分析，flex是lex的C++版 https:&#x2F;&#x2F;fbb-git.github.io&#x2F;flexcpp&#x2F;manual&#x2F;flexc++.html 关键函数为adjust，示例如下： 12345&#x2F;&#x2F;aa|bb	charPos &#x3D; 3[ac][ac][ac]	&amp;#123;adjust();&amp;#125;[bd][bd][bd]	&amp;#123;adjust(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CPT-Lab1">
+<meta property="og:url" content="https://aliceziyun.github.io/2022/11/05/CPT-Lab1/index.html">
 <meta property="og:site_name" content="Sissi&#39;s blog">
+<meta property="og:description" content="lab2  Lexical 使用flex C++做词法分析，flex是lex的C++版 https:&#x2F;&#x2F;fbb-git.github.io&#x2F;flexcpp&#x2F;manual&#x2F;flexc++.html 关键函数为adjust，示例如下： 12345&#x2F;&#x2F;aa|bb	charPos &#x3D; 3[ac][ac][ac]	&amp;#123;adjust();&amp;#125;[bd][bd][bd]	&amp;#123;adjust(">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-11-05T02:39:13.000Z">
+<meta property="article:modified_time" content="2022-11-05T02:43:20.852Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="homework">
+<meta property="article:tag" content="cpt-lab">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Sissi's blog" type="application/atom+xml">
@@ -69,39 +75,86 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/10/29/CSE-Lab2A/" class="archive-article-date">
-  <time class="dt-published" datetime="2022-10-29T13:15:43.000Z" itemprop="datePublished">Oct 29</time>
+        <section id="main"><article id="post-CPT-Lab1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/11/05/CPT-Lab1/" class="article-date">
+  <time class="dt-published" datetime="2022-11-05T02:39:13.000Z" itemprop="datePublished">2022-11-05</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/10/29/CSE-Lab2A/">CSE Lab2A</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      CPT-Lab1
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="lab2-Lexical"><a href="#lab2-Lexical" class="headerlink" title="lab2  Lexical"></a>lab2  Lexical</h3><hr>
+<p>使用flex C++做词法分析，flex是lex的C++版</p>
+<p><a target="_blank" rel="noopener" href="https://fbb-git.github.io/flexcpp/manual/flexc++.html">https://fbb-git.github.io/flexcpp/manual/flexc++.html</a></p>
+<p>关键函数为adjust，示例如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//aa|bb	charPos = 3</span></span><br><span class="line">[ac][ac][ac]	&#123;<span class="built_in">adjust</span>();&#125;</span><br><span class="line">[bd][bd][bd]	&#123;<span class="built_in">adjust</span>();&#125;</span><br><span class="line"><span class="comment">//then taking bb as a token,yylen = 2</span></span><br><span class="line"><span class="comment">//aabb| charPos = 3 + 2 = 5</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="一般步骤"><a href="#一般步骤" class="headerlink" title="一般步骤"></a>一般步骤</h5><ol>
+<li>根据正则表达式匹配字符串（规则优先or最长匹配），改变charPos</li>
+<li>如果当前是需要获取值的表达式，如int或string等类型，则获取其值并存储</li>
+<li>返回一个单词类型</li>
+</ol>
+<h5 id="遇到的问题："><a href="#遇到的问题：" class="headerlink" title="遇到的问题："></a>遇到的问题：</h5><ol>
+<li><p>解决&#x2F;和&#x2F;*的冲突问题：把comment的规则放在前面</p>
+</li>
+<li><p>解决comment的问题：</p>
+<p>学习一下condition的用法 <a target="_blank" rel="noopener" href="https://fbb-git.github.io/flexcpp/manual/flexc++03.html#l24">https://fbb-git.github.io/flexcpp/manual/flexc++03.html#l24</a></p>
+<p>注意comment可以嵌套</p>
+</li>
+<li><p>处理string的问题：使用string_buf存储string</p>
+</li>
+<li><p>处理id和保留字的关系：把保留字的规则尽量靠前</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://aliceziyun.github.io/2022/11/05/CPT-Lab1/" data-id="cla3bn38j0000awuvag852u9g" data-title="CPT-Lab1" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cpt-lab/" rel="tag">cpt-lab</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/homework/" rel="tag">homework</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/11/05/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          编译原理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/11/02/%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">语言学习</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 
 </section>
